@@ -179,7 +179,7 @@ while run:
                                     for i, b_piece in enumerate(alive_pieces_black):
                                         if (mouse_x, mouse_y) == (b_piece.x_pos, b_piece.y_pos):
                                             alive_pieces_black.pop(i)
-                                            white_score += b_piece.value
+                                            white_score += b_piece.material_value
                                     if check_mate(alive_pieces_black, alive_pieces_white) == True:
                                         final_mate = True
 
@@ -187,7 +187,7 @@ while run:
                                     for i, w_piece in enumerate(alive_pieces_white):
                                         if (mouse_x, mouse_y) == (w_piece.x_pos, w_piece.y_pos):
                                             alive_pieces_white.pop(i)
-                                            black_score += w_piece.value
+                                            black_score += w_piece.material_value
                                     if check_mate(alive_pieces_white, alive_pieces_black) == True:
                                         final_mate = True
 
