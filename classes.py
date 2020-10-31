@@ -18,24 +18,25 @@ def pos(i,j):
 
 def check_chess(own_list, adv_list):
     '''check the own chess'''
-
-    own_pieces_pos = np.array([[piece.x_pos, piece.y_pos] for piece in own_list])
-    adv_pieces_pos = np.array([[piece.x_pos, piece.y_pos] for piece in adv_list])
-
     L = []
-
     for piece in adv_list:
         sub = piece.get_possible_deplacements_without_chess(adv_list, own_list)
         L.append(sub)
-
     L = [piece[i] for piece in L for i in range(len(piece))]
-
     if [own_list[0].x_pos, own_list[0].y_pos] in L :
         return True
-
     else:
         return False
 
+def check_mate(own_list, adv_list):
+    #to check if cheesmate
+    mate = True
+    for piece in own_list:
+        piece.get_final_deplacements(own_list, adv_list)
+        if len(piece.possible_deplacements) > 0:
+            mate=False
+            break
+    return mate
 
 
 real_pos = np.array([[pos(i,j) for i in range(8)]for j in range(8)]).astype(int)

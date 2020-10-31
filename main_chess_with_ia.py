@@ -1,7 +1,7 @@
 import pygame
 import numpy as np
 from classes import Pion, Cavalier, Fou, Tour, Dame, Roi
-from classes import real_pos
+from classes import real_pos, check_mate
 from decision_tree import minimax_alpha_beta_pruning, get_score
 from decision_tree import final_decision
 
@@ -17,7 +17,7 @@ pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 70)
 win = pygame.display.set_mode((w_width+300,w_width))
 pygame.display.set_caption("Chess Game")
-new_game_button = pygame.Rect(680, 150, 140, 50)
+new_game_button = pygame.Rect(660, 250, 180, 50)
 font = pygame.font.SysFont('Arial', 25)
 
 #Load all images into memory to speed up the process
@@ -32,15 +32,6 @@ circles = [pygame.image.load('pieces_pic/circle__1.PNG'),
            pygame.image.load('pieces_pic/circle_1.PNG'),
            pygame.image.load('pieces_pic/circle_0.PNG')]
 
-def check_mate(own_list, adv_list):
-	#to check if cheesmate
-    mate = True
-    for piece in own_list:
-        piece.get_final_deplacements(own_list, adv_list)
-        if len(piece.possible_deplacements) > 0:
-            mate=False
-            break
-    return mate
 
 def new_game():
 	# to initialize a new game
@@ -190,7 +181,7 @@ while run:
     pygame.draw.line(win, (125,123,253), (601,0), (601,600), 4)
 
     new_game_text = font.render("NEW GAME", False, (1, 1, 1))
-    new_game_rect = new_game_text.get_rect(center=(750, 175))
+    new_game_rect = new_game_text.get_rect(center=(750, 275))
 
     for pos in potential_depla:
         image = circles[int(anim_count)%10]
